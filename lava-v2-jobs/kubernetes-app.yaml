@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kernelci-lava-v2-jobs-jenkins
+spec:
+  type: NodePort
+  ports:
+    - port: 2202
+      targetPort: 22
+      nodePort: 30000
+      name: sshd
+  selector:
+    app: kernelci-lava-v2-jobs-jenkins
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kernelci-lava-v2-jobs-jenkins
+spec:
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
+      # generated from the deployment name
+      labels:
+        app: kernelci-lava-v2-jobs-jenkins
+    spec:
+      containers:
+      - name: kernelci-lava-v2-jobs
+        image: mattface/kernelci-lava-v2-jobs:latest
+        ports:
+        - containerPort: 22
+        env:
+        - name: SSH_PASSWORD
+          value: setYourPasswordHere

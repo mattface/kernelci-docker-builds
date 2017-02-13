@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kernelci-jenkins-builder
+spec:
+  type: NodePort
+  ports:
+    - port: 2201
+      targetPort: 22
+      nodePort: 30001
+      name: sshd
+  selector:
+    app: kernelci-jenkins-builder
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kernelci-jenkins-builder
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kernelci-jenkins-builder
+    spec:
+      containers:
+      - name: kernelci-jenkins-builder
+        image: mattface/kernelci-jenkins-builder:latest
+        ports:
+        - containerPort: 22
+        env:
+        - name: SSH_PASSWORD
+          value: setYourPasswordHere
