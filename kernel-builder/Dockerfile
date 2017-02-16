@@ -1,8 +1,7 @@
-FROM debian:jessie-backports
+FROM debian:stretch
 MAINTAINER "Matt Hart" <matt@mattface.org>
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server git expect cron anacron supervisor
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -t jessie-backports install ansible
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server git expect cron anacron supervisor ansible
 ADD set_buildslave_pw.sh /set_buildslave_pw.sh
 ADD run.sh /run.sh
 ADD expect_pw.sh /expect_pw.sh

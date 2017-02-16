@@ -1,7 +1,7 @@
-FROM debian:jessie-backports
+FROM debian:stretch
 MAINTAINER "Matt Hart" <matt@mattface.org>
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server python-jinja2 python-yaml python-requests python-keyring python2.7 expect openjdk-7-jre-headless git supervisor
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server python-jinja2 python-yaml python-requests python-keyring python2.7 expect openjdk-8-jre-headless git supervisor
 ADD set_buildslave_pw.sh /set_buildslave_pw.sh
 ADD run.sh /run.sh
 ADD expect_pw.sh /expect_pw.sh
