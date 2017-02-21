@@ -1,7 +1,10 @@
-FROM debian:stretch
+FROM ubuntu:xenial
 MAINTAINER "Matt Hart" <matt@mattface.org>
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server git expect cron anacron supervisor ansible
+RUN wget http://mirrors.kernel.org/ubuntu/pool/universe/a/ansible/ansible_2.2.1.0-1_all.deb -O /root/ansible.deb
+RUN dpkg -i /root/ansible.deb
+RUN apt-get -f -y install
 ADD set_buildslave_pw.sh /set_buildslave_pw.sh
 ADD run.sh /run.sh
 ADD expect_pw.sh /expect_pw.sh
