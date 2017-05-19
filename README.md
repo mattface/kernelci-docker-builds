@@ -10,7 +10,6 @@ Creates a docker image that has enough deps installed to run ansible from https:
 Then the container will ansbile itself on boot to have all the build deps needed for a kernelci builder.
 SSHD and CRON are started and monitored by supervisord, allowing the mirror sync scripts to run in cron.
 
-
 ### build a docker image:
 `docker build -t mattface/kernelci-jenkins-builder kernel-builder`
 
@@ -19,4 +18,4 @@ SSHD and CRON are started and monitored by supervisord, allowing the mirror sync
 
 # Using my images
 kubernetes-app.yaml in each directory is a simple service description to start 1 replica on a kubernetes node, from my prebuilt dockerhub images.
-Configure SSH_PASSWORD, API_TOKEN and API_URL in kubernetes-app.yaml and then apply it to your kubernetes cluster.
+Configure SSH_PASSWORD in kubernetes-app.yaml and then apply it your kubernetes cluster.

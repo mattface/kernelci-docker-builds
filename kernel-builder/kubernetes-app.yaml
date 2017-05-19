@@ -31,7 +31,3 @@ spec:
         env:
         - name: SSH_PASSWORD
           value: setYourPasswordHere
-        - name: API_URL
-          value: http://someurl
-        - name: API_TOKEN
-          value: sometoken
